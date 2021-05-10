@@ -1,9 +1,9 @@
 heat-dsmr-reader
 ================
 
-1. Installation: `npm install`
-2. Copy `config.sample.js` to `config.js` and changes values
-3. Run `node app`
+1. Copy `config.sample.js` to `config.js` and changes values
+1. Ensure device in `docker-compose.yaml` is correctly set to the dsmr-serial port
+1. Run `docker-compose up -d`
 
 
 Credits

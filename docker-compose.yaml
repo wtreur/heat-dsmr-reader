@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  broker:
+    build: .
+    volumes:
+     - ./config.js:/opt/heat-dsmr-reader/config.js
+    devices: 
+     - /dev/ttyUSB0:/dev/ttyUSB0

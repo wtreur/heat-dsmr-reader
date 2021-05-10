@@ -1,4 +1,4 @@
-const SmartMeter = require('node-dsmr');
+const SmartMeter = require('./node-dsmr');
 const MQTT = require("async-mqtt");
 const config = require("./config")
 

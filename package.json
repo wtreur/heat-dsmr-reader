@@ -1,0 +1,22 @@
+{
+  "name": "heat-dsmr-reader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wtreur/heat-dsmr-reader.git"
+  },
+  "author": "Walter Treur",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/wtreur/heat-dsmr-reader/issues"
+  },
+  "homepage": "https://github.com/wtreur/heat-dsmr-reader#readme",
+  "dependencies": {
+    "node-dsmr": "git://github.com/wtreur/node-dsmr.git#thermal"
+  }
+}

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/wtreur/heat-dsmr-reader#readme",
   "dependencies": {
+    "async-mqtt": "^2.6.1",
     "node-dsmr": "git://github.com/wtreur/node-dsmr.git#thermal"
   }
 }

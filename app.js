@@ -1,19 +1,38 @@
-const SmartMeter = require('node-dsmr')
+const SmartMeter = require('node-dsmr');
+const MQTT = require("async-mqtt");
+const config = require("./config")
 
-const options = {
-    port: '/dev/ttyUSB0',
+const dsmrOptions = {
+    port: config.dsmr.port,
     baudrate: 115200,
     databits: 8,
     parity: 'none',
-    disableCrcChecking: true
-}
+    disableCrcChecking: config.dsmr.disableCrcChecking
+};
 
-const smartmeter = new SmartMeter(options)
+let mqttClient;
+let mqttClientConnected = false;
 
-smartmeter.on('connected', () => {
-    console.log('connected!')
+const smartmeter = new SmartMeter(dsmrOptions);
+
+smartmeter.on('connected', async () => {
+  mqttClient = await MQTT.connectAsync(config.mqtt.brokerUrl, {
+    username: config.mqtt.username,
+    password: config.mqtt.password
+  });
+  mqttClientConnected = true;
 });
 
-smartmeter.on('telegram', (data) => {
-  console.log('telegram!', data.heat.totalConsumed)
+smartmeter.on('telegram', async (data) => {
+  if (data.heat.totalConsumed) {
+    if (mqttClientConnected) {
+      try {    
+        mqttClient.publish(config.mqtt.topic, data.heat.totalConsumed.toString());
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
 });
+
+smartmeter.connect();
